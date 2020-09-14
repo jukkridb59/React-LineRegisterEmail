@@ -61,6 +61,7 @@ export default function Register() {
         ) : null}
 
         <strong>ชื่อห้องที่จะขอรับการแจ้งเตือน Line Notify</strong>
+        <strong>ชื่อห้องที่จะขอรับการแจ้งเตือน Line Notify</strong>
         <form className={classes.root} autoComplete="off">
           <CssTextField
             required
