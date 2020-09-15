@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "../App.css";
 import { ROOM } from "../Auth";
 
@@ -23,7 +23,7 @@ export default function Callback() {
   const [code, setCode] = useState("");
 
   const urlParams = new URLSearchParams(window.location.search);
-  const myParam = urlParams.get("code");
+  
 
   const getToken = () => {
     console.log(code, room);
@@ -48,15 +48,13 @@ export default function Callback() {
     }
   };
 
-  useEffect(() => {
+  const myParam = urlParams.get("code");
+  if (myParam !== null) {
     setRoom(localStorage.getItem(ROOM));
+    setCode(myParam);
 
-    if (myParam !== null) {
-      setCode(myParam);
-
-      getToken();
-    }
-  });
+    getToken();
+  }
 
   return (
     <div className="App">
