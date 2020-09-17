@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../App.css";
-import { ROOM } from "../Auth";
+import { GROUPNAME, COMPANYNAME } from "../Auth";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -19,14 +19,15 @@ const useStyles = makeStyles((theme) => ({
 export default function Callback() {
   const classes = useStyles();
 
-  const [room, setRoom] = useState("");
+  const [groupName, setGroupName] = useState("");
+  const [companyName, setCompanyName] = useState("");
+
   const [code, setCode] = useState("");
 
   const urlParams = new URLSearchParams(window.location.search);
-  
 
   const getToken = () => {
-    console.log(code, room);
+    // console.log(code, room);
 
     try {
       axios
@@ -34,14 +35,16 @@ export default function Callback() {
           "http://localhost:5000/code",
           querystring.stringify({
             code: code,
-            room: localStorage.getItem(ROOM),
+            groupName: localStorage.getItem(GROUPNAME),
+            companyName: localStorage.getItem(COMPANYNAME),
           }),
           { headers: { "content-type": "application/x-www-form-urlencoded" } }
         )
         .then((response) => {
           console.log("response: ", response);
 
-          localStorage.removeItem(ROOM);
+          localStorage.removeItem(GROUPNAME);
+          localStorage.removeItem(COMPANYNAME);
         });
     } catch (err) {
       console.log("err", err);
@@ -50,7 +53,8 @@ export default function Callback() {
 
   const myParam = urlParams.get("code");
   if (myParam !== null) {
-    setRoom(localStorage.getItem(ROOM));
+    setGroupName(localStorage.getItem(GROUPNAME));
+    setCompanyName(localStorage.getItem(COMPANYNAME));
     setCode(myParam);
 
     getToken();
@@ -60,7 +64,9 @@ export default function Callback() {
     <div className="App">
       <header className="App-header">
         <div className={classes.root}>
-          <strong>ท่านได้ทำการลงทะเบียนไลน์ ชื่อห้อง</strong>
+          <strong>
+            ท่านได้ทำการลงทะเบียนไลน์ การแจ้งเตือนผ่าน Line Notify เรียบร้อยแล้ว
+          </strong>
           <br></br>
           <strong>{room}</strong>
         </div>

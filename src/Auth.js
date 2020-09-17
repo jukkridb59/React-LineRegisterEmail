@@ -1,1 +1,2 @@
-export const ROOM = "room";
+export const GROUPNAME = "room";
+export const COMPANYNAME = "com";

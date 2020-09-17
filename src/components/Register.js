@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../App.css";
-import { ROOM } from "../Auth";
+import { GROUPNAME, COMPANYNAME } from "../Auth";
 
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
@@ -38,13 +38,14 @@ const CssTextField = withStyles({
 export default function Register() {
   const classes = useStyles();
 
-  const [room, setRoom] = useState("");
+  const [groupName, setGroupName] = useState("");
+  const [companyName, setCompanyName] = useState("")
 
   const [alert, setAlert] = useState(false);
 
   const handleSubmit = () => {
-    if (room !== "") {
-      localStorage.setItem(ROOM, room);
+    if ((groupName !== "") && (companyName !== "")) {
+      localStorage.setItem(GROUPNAME, groupName);
       Auth();
     } else {
       setAlert(true);
@@ -56,19 +57,28 @@ export default function Register() {
       <header className="App-header">
         {alert ? (
           <Alert severity="error">
-            <strong>กรุณาใส่ชื่อห้องของท่าน</strong>
+            <strong>กรุณาใส่ชื่อ Group ใน Line หรือชื่อ Company ของท่านที่จะให้แจ้งเตือน</strong>
           </Alert>
         ) : null}
 
-        <strong>ชื่อห้องที่จะขอรับการแจ้งเตือน Line Notify</strong>
+        <strong>ชื่อ Group ใน Line ของท่านที่จะให้แจ้งเตือนผ่าน Line Notify</strong>
         <form className={classes.root} autoComplete="off">
           <CssTextField
             required
             id="outlined-basic"
-            label="Room"
+            label="Group-Name"
             variant="outlined"
-            value={room}
-            onChange={(e) => setRoom(e.target.value)}
+            value={groupName}
+            onChange={(e) => setGroupName(e.target.value)}
+          />
+          <br></br>
+          <CssTextField
+            required
+            id="outlined-basic"
+            label="Company-Name"
+            variant="outlined"
+            value={companyName}
+            onChange={(e) => setCompanyName(e.target.value)}
           />
           <br></br>
           <Button variant="contained" color="primary" onClick={handleSubmit}>
