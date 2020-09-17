@@ -68,7 +68,9 @@ export default function Callback() {
             ท่านได้ทำการลงทะเบียนไลน์ การแจ้งเตือนผ่าน Line Notify เรียบร้อยแล้ว
           </strong>
           <br></br>
-          <strong>{room}</strong>
+          <strong>{groupName}</strong>
+          <strong> และ </strong>
+          <strong>{companyName}</strong>
         </div>
       </header>
     </div>

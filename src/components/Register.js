@@ -39,13 +39,14 @@ export default function Register() {
   const classes = useStyles();
 
   const [groupName, setGroupName] = useState("");
-  const [companyName, setCompanyName] = useState("")
+  const [companyName, setCompanyName] = useState("");
 
   const [alert, setAlert] = useState(false);
 
   const handleSubmit = () => {
-    if ((groupName !== "") && (companyName !== "")) {
+    if (groupName !== "" && companyName !== "") {
       localStorage.setItem(GROUPNAME, groupName);
+      localStorage.setItem(COMPANYNAME, companyName);
       Auth();
     } else {
       setAlert(true);
@@ -57,11 +58,16 @@ export default function Register() {
       <header className="App-header">
         {alert ? (
           <Alert severity="error">
-            <strong>กรุณาใส่ชื่อ Group ใน Line หรือชื่อ Company ของท่านที่จะให้แจ้งเตือน</strong>
+            <strong>
+              กรุณาใส่ชื่อ Group ใน Line หรือชื่อ Company
+              ของท่านที่จะให้แจ้งเตือน
+            </strong>
           </Alert>
         ) : null}
 
-        <strong>ชื่อ Group ใน Line ของท่านที่จะให้แจ้งเตือนผ่าน Line Notify</strong>
+        <strong>
+          ชื่อ Group ใน Line ของท่านที่จะให้แจ้งเตือนผ่าน Line Notify
+        </strong>
         <form className={classes.root} autoComplete="off">
           <CssTextField
             required
@@ -71,6 +77,8 @@ export default function Register() {
             value={groupName}
             onChange={(e) => setGroupName(e.target.value)}
           />
+          <br></br>
+          <strong>ชื่อบริษัท</strong>
           <br></br>
           <CssTextField
             required
