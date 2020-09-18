@@ -24,12 +24,8 @@ export default function Callback() {
 
   const [code, setCode] = useState("");
 
-  const urlParams = new URLSearchParams(window.location.search);
-  const myParam = urlParams.get("code");
-
-  const getToken = () => {
-    console.log("In getToken()");
-
+  function getToken() {
+    // console.log("In getToken()");
     try {
       axios
         .post(
@@ -42,20 +38,23 @@ export default function Callback() {
           { headers: { "content-type": "application/x-www-form-urlencoded" } }
         )
         .then((response) => {
-          console.log("response: ", response);
+          // console.log("response: ", response);
 
           localStorage.clear();
         });
     } catch (err) {
       console.log("err", err);
     }
-  };
+  }
 
   useEffect(() => {
-    console.log("Do in use effect!!!");
+    // console.log("Do in use effect!!!");
+    const urlParams = new URLSearchParams(window.location.search);
+    const myParam = urlParams.get("code");
+
     setGroupName(localStorage.getItem(GROUPNAME));
     setCompanyName(localStorage.getItem(COMPANYNAME));
-    // setCode(myParam);
+    setCode(myParam);
 
     // getToken();
   }, []);
