@@ -54,7 +54,9 @@ export default function Callback() {
     setCompanyName(localStorage.getItem(COMPANYNAME));
     setCode(myParam);
 
-    getToken();
+    if (myParam !== "") {
+      getToken();
+    }
   }, []);
 
   return (
