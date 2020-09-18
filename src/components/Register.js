@@ -47,6 +47,7 @@ export default function Register() {
     if (groupName !== "" && companyName !== "") {
       localStorage.setItem(GROUPNAME, groupName);
       localStorage.setItem(COMPANYNAME, companyName);
+
       Auth();
     } else {
       setAlert(true);

@@ -27,17 +27,6 @@ export default function Callback() {
   const urlParams = new URLSearchParams(window.location.search);
   const myParam = urlParams.get("code");
 
-  useEffect(() => {
-    if (myParam !== null) {
-      console.log("Do in use effect!!!");
-      setGroupName(localStorage.getItem(GROUPNAME));
-      setCompanyName(localStorage.getItem(COMPANYNAME));
-      setCode(myParam);
-
-      getToken();
-    }
-  });
-
   const getToken = () => {
     console.log("In getToken()");
 
@@ -61,6 +50,15 @@ export default function Callback() {
       console.log("err", err);
     }
   };
+
+  useEffect(() => {
+    console.log("Do in use effect!!!");
+    setGroupName(localStorage.getItem(GROUPNAME));
+    setCompanyName(localStorage.getItem(COMPANYNAME));
+    // setCode(myParam);
+
+    // getToken();
+  }, []);
 
   return (
     <div className="App">
